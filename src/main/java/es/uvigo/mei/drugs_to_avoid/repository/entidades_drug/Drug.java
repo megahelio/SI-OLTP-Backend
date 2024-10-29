@@ -1,5 +1,6 @@
 package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.embedables.Atc;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,10 +23,10 @@ public class Drug implements Serializable {
     String alternative;
     Boolean isPrimaryCare;
 
-    @OneToMany(mappedBy = "drug")
+    @OneToMany(mappedBy = "drug", cascade = CascadeType.ALL, orphanRemoval = true)
     List<HealthAlert> healthAlertList;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "DRUG_PRODUCT",
             joinColumns = @JoinColumn(name = "DRUG_ID", referencedColumnName = "id"),

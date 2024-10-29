@@ -19,6 +19,5 @@ public class Manufacturer implements Serializable {
     @Embedded
     Address address;
 
-    @OneToMany(mappedBy = "manufacturer")
-    List<Product> productList;
+
 }

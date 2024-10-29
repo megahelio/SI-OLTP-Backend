@@ -1,10 +1,10 @@
 package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ManyToAny;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,9 +21,11 @@ public class Product implements Serializable {
     Integer units;
     Integer mgs;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "manufacturer_name", referencedColumnName = "name")
     Manufacturer manufacturer;
 
     @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
     List<Drug> drugList;
-
 }
