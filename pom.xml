@@ -37,7 +37,6 @@
         </dependency>
         <!-- Anadido para ejemplo HATEOAS-->
 
-
         <!-- Anadido para documentacion OpenAPI autogenerada -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -45,11 +44,6 @@
             <version>2.6.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.6.0</version>
-        </dependency>
         <!-- Anadido para documentacion OpenAPI autogenerada -->
 
         <dependency>

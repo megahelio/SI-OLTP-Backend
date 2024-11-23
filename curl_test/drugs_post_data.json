@@ -1,0 +1,44 @@
+{
+  "atc": {
+    "grupoAnatomicoPrincipal": "A",
+    "subgrupoTerapeutico": "A01",
+    "subgrupoFarmacologico": "A01A",
+    "subgrupoQuimico": "A01AA",
+    "principioActivo": "Aspirina",
+    "grupoAnatomicoPrincipalDescripcion": "Sistema digestivo y metabolismo",
+    "subgrupoTerapeuticoDescripcion": "Medicamentos para trastornos gástricos",
+    "subgrupoFarmacologicoDescripcion": "Antiácidos",
+    "subgrupoQuimicoDescripcion": "Compuestos de aluminio",
+    "principioActivoDescripcion": "Ácido acetilsalicílico"
+  },
+  "reasonToAvoid": "Puede causar gastritis en pacientes con antecedentes",
+  "alternative": "Paracetamol",
+  "isPrimaryCare": true,
+  "healthAlertList": [
+    {
+      "alertLink": "https://alertas.example.com/1",
+      "organization": "FDA"
+    }
+  ],
+  "productList": [
+    {
+      "gtin": 1234567890123,
+      "name": "Aspirina 500mg",
+      "units": 20,
+      "mgs": 500,
+      "manufacturer": {
+        "name": "Bayer",
+        "cif": "B12345678",
+        "address": {
+          "number": 100,
+          "floor": 1,
+          "letra": "A",
+          "road": "Avenida Salud",
+          "city": "Madrid",
+          "country": "España",
+          "region": "Madrid"
+        }
+      }
+    }
+  ]
+}

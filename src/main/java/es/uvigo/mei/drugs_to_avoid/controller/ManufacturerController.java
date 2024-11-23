@@ -31,6 +31,13 @@ public class ManufacturerController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping(params = "cif")
+    public ResponseEntity<Manufacturer> findByCIF(@RequestParam(required = true) String cif) {
+        return manufacturerDao.findByCif(cif)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Manufacturer> create(@RequestBody Manufacturer manufacturer) {
         Manufacturer savedManufacturer = manufacturerDao.save(manufacturer);

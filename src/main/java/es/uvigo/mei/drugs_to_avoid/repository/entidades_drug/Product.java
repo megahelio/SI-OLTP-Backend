@@ -21,7 +21,7 @@ public class Product implements Serializable {
     Integer units;
     Integer mgs;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "manufacturer_name", referencedColumnName = "name")
     Manufacturer manufacturer;
 
