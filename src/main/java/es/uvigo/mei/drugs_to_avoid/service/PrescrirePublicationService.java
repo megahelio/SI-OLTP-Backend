@@ -1,17 +1,16 @@
 package es.uvigo.mei.drugs_to_avoid.service;
 
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.DrugDao;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PrescrirePublicationDao;
+import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PublicationDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Drug;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.PrescrirePublication;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 @Service
 public class PrescrirePublicationService {
     @Autowired
-    PrescrirePublicationDao prescrirePublicationDao;
+    PublicationDao publicationDao;
     @Autowired
     DrugDao drugDao;
 
@@ -21,9 +20,9 @@ public class PrescrirePublicationService {
      * @param drugId
      * @return
      */
-    public PrescrirePublication removeDrug(Integer publicationID, Long drugId) {
+    public Publication removeDrug(Long publicationID, Long drugId) {
         // Encontrar la publicación por el año (ID)
-        PrescrirePublication publication = prescrirePublicationDao.findById(publicationID)
+        Publication publication = publicationDao.findById(publicationID)
                 .orElseThrow(() -> new IllegalArgumentException("Publicación no encontrada con el ID: " + publicationID));
 
         // Encontrar el medicamento por su ID
@@ -38,7 +37,7 @@ public class PrescrirePublicationService {
         }
 
         // Guardar los cambios en la publicación
-        return prescrirePublicationDao.save(publication);
+        return publicationDao.save(publication);
     }
 
     /**
@@ -47,9 +46,9 @@ public class PrescrirePublicationService {
      * @param drugId
      * @return
      */
-    public PrescrirePublication addDrug(Integer publicationID, Long drugId) {
+    public Publication addDrug(Long publicationID, Long drugId) {
         // Encontrar la publicación por el año (ID)
-        PrescrirePublication publication = prescrirePublicationDao.findById(publicationID)
+        Publication publication = publicationDao.findById(publicationID)
                 .orElseThrow(() -> new IllegalArgumentException("Publicación no encontrada con el ID: " + publicationID));
 
         // Encontrar el medicamento por su ID
@@ -64,6 +63,6 @@ public class PrescrirePublicationService {
         }
 
         // Guardar los cambios en la publicación
-        return prescrirePublicationDao.save(publication);
+        return publicationDao.save(publication);
     }
 }

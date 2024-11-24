@@ -1,25 +1,29 @@
 package es.uvigo.mei.drugs_to_avoid.controller;
 
+import es.uvigo.mei.drugs_to_avoid.controller.error_response.ErrorResponse;
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.ManufacturerDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Manufacturer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="manufacturers", produces = "application/json")
+@RequestMapping(path = "manufacturers", produces = "application/json")
 public class ManufacturerController {
 
     @Autowired
     ManufacturerDao manufacturerDao;
 
     @GetMapping
-    public ResponseEntity<List<Manufacturer>> findAll(){
-        return  ResponseEntity.ok(manufacturerDao.findAll());
+    public ResponseEntity<List<Manufacturer>> findAll() {
+        return ResponseEntity.ok(manufacturerDao.findAll());
     }
 
     @GetMapping("/{id}")
@@ -38,10 +42,18 @@ public class ManufacturerController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Manufacturer> create(@RequestBody Manufacturer manufacturer) {
+    public ResponseEntity<?> create(@RequestBody Manufacturer manufacturer) {
+        if (manufacturerDao.findByCif(manufacturer.getCif()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("CIF ya existe"));
+        }
+        if (manufacturerDao.findById(manufacturer.getName()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("Nombre ya existe"));
+        }
         Manufacturer savedManufacturer = manufacturerDao.save(manufacturer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedManufacturer);
+
     }
 
     @PutMapping("/{id}")

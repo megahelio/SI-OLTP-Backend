@@ -1,11 +1,9 @@
 package es.uvigo.mei.drugs_to_avoid.controller;
 
 import es.uvigo.mei.drugs_to_avoid.controller.error_response.ErrorResponse;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PrescrirePublicationDao;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.PrescrirePublication;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.embedables.Atc;
+import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PublicationDao;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Publication;
 import es.uvigo.mei.drugs_to_avoid.service.PrescrirePublicationService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +17,18 @@ import java.util.Optional;
 public class PrescrirePublicationController {
 
     @Autowired
-    PrescrirePublicationDao prescrirePublicationDao;
+    PublicationDao publicationDao;
     @Autowired
     PrescrirePublicationService prescrirePublicationService;
 
     @GetMapping()
-    public ResponseEntity<List<PrescrirePublication>> findAll() {
-        return ResponseEntity.ok(prescrirePublicationDao.findAll());
+    public ResponseEntity<List<Publication>> findAll() {
+        return ResponseEntity.ok(publicationDao.findAll());
     }
 
-    @GetMapping("/{year}")
-    public ResponseEntity<PrescrirePublication> findById(@PathVariable Integer year) {
-        Optional<PrescrirePublication> prescrirePublication = prescrirePublicationDao.findById(year);
+    @GetMapping("/{id}")
+    public ResponseEntity<Publication> findById(@PathVariable Long id) {
+        Optional<Publication> prescrirePublication = publicationDao.findById(id);
         if (prescrirePublication.isPresent()) {
             return ResponseEntity.ok(prescrirePublication.get());
         } else {
@@ -39,47 +37,47 @@ public class PrescrirePublicationController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<PrescrirePublication> create(@RequestBody PrescrirePublication prescrirePublication) {
-        PrescrirePublication savedPrescrirePublication = prescrirePublicationDao.save(prescrirePublication);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPrescrirePublication);
+    public ResponseEntity<Publication> create(@RequestBody Publication publication) {
+
+        Publication savedPublication = publicationDao.save(publication);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedPublication);
     }
 
-    @PutMapping("/{year}")
-    public ResponseEntity<PrescrirePublication> update(@PathVariable Integer year, @RequestBody PrescrirePublication prescrirePublicationDetails) {
-        Optional<PrescrirePublication> existingPrescrirePublication = prescrirePublicationDao.findById(year);
+    @PutMapping("/{id}")
+    public ResponseEntity<Publication> update(@PathVariable Long id, @RequestBody Publication publicationDetails) {
+        Optional<Publication> existingPrescrirePublication = publicationDao.findById(id);
         if (existingPrescrirePublication.isPresent()) {
-            prescrirePublicationDetails.setYear(year);
-            PrescrirePublication updatedPrescrirePublication = prescrirePublicationDao.save(prescrirePublicationDetails);
-            return ResponseEntity.ok(updatedPrescrirePublication);
+            Publication updatedPublication = publicationDao.save(publicationDetails);
+            return ResponseEntity.ok(updatedPublication);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/{year}")
-    public ResponseEntity<Void> delete(@PathVariable Integer year) {
-        Optional<PrescrirePublication> prescrirePublication = prescrirePublicationDao.findById(year);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Optional<Publication> prescrirePublication = publicationDao.findById(id);
         if (prescrirePublication.isPresent()) {
-            prescrirePublicationDao.delete(prescrirePublication.get());
+            publicationDao.delete(prescrirePublication.get());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PatchMapping("/{year}")
+    @PatchMapping("/{publication_id}")
     public ResponseEntity<?> removeDrug(
-            @PathVariable Integer year,
+            @PathVariable Long publication_id,
             @RequestParam(name = "drug_id", required = true) Long drug_id,
             @RequestParam(name = "action", required = true) String action) {
 
-        PrescrirePublication publicationSaved;
+        Publication publicationSaved;
         switch (action) {
             case "removeDrug":
-                publicationSaved = prescrirePublicationService.removeDrug(year, drug_id);
+                publicationSaved = prescrirePublicationService.removeDrug(publication_id, drug_id);
                 return ResponseEntity.ok(publicationSaved);
             case "addDrug":
-                publicationSaved = prescrirePublicationService.addDrug(year, drug_id);
+                publicationSaved = prescrirePublicationService.addDrug(publication_id, drug_id);
                 return ResponseEntity.ok(publicationSaved);
             default:
                 // Si la acción no es válida, lanzar una excepción o devolver un error

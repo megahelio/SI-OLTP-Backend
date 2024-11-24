@@ -8,16 +8,20 @@ import java.util.List;
 
 @Entity
 @Data
-public class PrescrirePublication implements Serializable {
+public class Publication implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
     Integer year;
 
+    @Column(unique = true)
     String publicationLink;
 
     @ManyToMany
     @JoinTable(
             name = "PUBLICATION_DRUG",
-            joinColumns = @JoinColumn(name = "PUBLICATION_ID", referencedColumnName = "year"),
+            joinColumns = @JoinColumn(name = "PUBLICATION_ID", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "DRUG_ID", referencedColumnName = "id"))
     List<Drug> drugList;
 }

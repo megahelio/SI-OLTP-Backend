@@ -2,7 +2,7 @@ package es.uvigo.mei.drugs_to_avoid;
 
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.DrugDao;
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.ManufacturerDao;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PrescrirePublicationDao;
+import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PublicationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +16,7 @@ public class DrugsSpringApplication {
 	private ManufacturerDao manufacturerDao;
 
 	@Autowired
-	private PrescrirePublicationDao prescrirePublicationDao;
+	private PublicationDao publicationDao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DrugsSpringApplication.class, args);
@@ -123,17 +123,17 @@ public class DrugsSpringApplication {
 //		drugDao.save(drug1);
 //		drugDao.save(drug2);
 //
-//		PrescrirePublication publication1 = new PrescrirePublication();
+//		Publication publication1 = new Publication();
 //		publication1.setYear(2022);
 //		publication1.setPublicationLink("https://prescrire.org/publication2022");
 //		publication1.setDrugList(List.of(drug1, drug2));
 //
-//		PrescrirePublication publication2 = new PrescrirePublication();
+//		Publication publication2 = new Publication();
 //		publication2.setYear(2023);
 //		publication2.setPublicationLink("https://prescrire.org/publication2023");
 //		publication2.setDrugList(List.of(drug1));
 //
-//		prescrirePublicationDao.save(publication1);
-//		prescrirePublicationDao.save(publication2);
+//		publicationDao.save(publication1);
+//		publicationDao.save(publication2);
 //	}
 }
