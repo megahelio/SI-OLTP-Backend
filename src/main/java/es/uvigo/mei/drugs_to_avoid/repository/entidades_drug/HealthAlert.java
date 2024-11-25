@@ -14,8 +14,7 @@ public class HealthAlert implements Serializable {
     Long idHealthAlert;
     String alertLink;
     String organization;
-    @ManyToOne
-    @JoinColumn(name = "id")
-    @JsonBackReference
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="drug_id", nullable=false)
     Drug drug;
 }

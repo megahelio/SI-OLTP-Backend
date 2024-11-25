@@ -41,7 +41,6 @@ public class ProductController {
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product productDetails) {
         Optional<Product> existingProduct = productDao.findById(id);
         if (existingProduct.isPresent()) {
-            productDetails.setGtin(existingProduct.get().getGtin());
             Product updatedProduct = productDao.save(productDetails);
             return ResponseEntity.ok(updatedProduct);
         } else {

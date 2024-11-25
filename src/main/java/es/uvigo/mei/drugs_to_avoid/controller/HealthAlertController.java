@@ -41,7 +41,6 @@ public class HealthAlertController {
     public ResponseEntity<HealthAlert> update(@PathVariable Long id, @RequestBody HealthAlert healthAlertDetails) {
         Optional<HealthAlert> existingHealthAlert = healthAlertDao.findById(id);
         if (existingHealthAlert.isPresent()) {
-            healthAlertDetails.setIdHealthAlert(existingHealthAlert.get().getIdHealthAlert());
             HealthAlert updatedHealthAlert = healthAlertDao.save(healthAlertDetails);
             return ResponseEntity.ok(updatedHealthAlert);
         } else {

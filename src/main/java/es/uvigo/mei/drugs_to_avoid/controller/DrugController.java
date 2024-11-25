@@ -2,13 +2,10 @@ package es.uvigo.mei.drugs_to_avoid.controller;
 
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.DrugDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Drug;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.HealthAlert;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.embedables.Atc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping(path = "/drugs",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/drugs", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DrugController {
 
     @Autowired
@@ -30,21 +27,16 @@ public class DrugController {
     @GetMapping("/{id}")
     public ResponseEntity<Drug> findById(@PathVariable Long id) {
         Optional<Drug> drug = drugDao.findById(id);
-        if (drug.isPresent()) {
-            return ResponseEntity.ok(drug.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return drug.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping(params = "activePrinciple")
+    public ResponseEntity<List<Drug>> findById(@RequestParam(name = "activePrinciple", required = true) String activePrinciple) {
+        return ResponseEntity.ok(drugDao.findByActivePrinciple(activePrinciple));
+    }
+
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Drug> create(@RequestBody Drug drug) {
-        // Asignar el Drug a cada HealthAlert para establecer la relación bidireccional
-        if (drug.getHealthAlertList() != null) {
-            for (HealthAlert alert : drug.getHealthAlertList()) {
-                alert.setDrug(drug); // Establecer el drug en cada HealthAlert
-            }
-        }
-
         Drug savedDrug = drugDao.save(drug);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDrug);
     }
