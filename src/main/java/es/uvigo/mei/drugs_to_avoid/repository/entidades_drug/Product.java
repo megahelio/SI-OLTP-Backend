@@ -1,10 +1,10 @@
 package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.ManyToAny;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,7 +25,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "manufacturer_name", referencedColumnName = "name")
     Manufacturer manufacturer;
 
-    @ManyToMany(mappedBy = "productList")
+    @ManyToMany(mappedBy = "productList", fetch = FetchType.EAGER)
     @JsonIgnore
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
     List<Drug> drugList;
 }
