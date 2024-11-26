@@ -3,7 +3,6 @@ package es.uvigo.mei.drugs_to_avoid.repository.entidades;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
 import java.io.Serializable;
 
 @Entity
