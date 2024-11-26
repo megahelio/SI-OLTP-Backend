@@ -1,4 +1,4 @@
-package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.embedables;
+package es.uvigo.mei.drugs_to_avoid.repository.entidades.embedables;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;

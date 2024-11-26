@@ -1,8 +1,7 @@
-package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
+package es.uvigo.mei.drugs_to_avoid.repository.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,8 +24,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "manufacturer_name", referencedColumnName = "name")
     Manufacturer manufacturer;
 
-    @ManyToMany(mappedBy = "productList", fetch = FetchType.EAGER)
-    @JsonIgnore
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "PRODUCT_DRUG",
+            joinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "gtin"),
+            inverseJoinColumns = @JoinColumn(name = "DRUG_ID", referencedColumnName = "id"))
     List<Drug> drugList;
 }

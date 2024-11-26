@@ -1,6 +1,6 @@
-package es.uvigo.mei.drugs_to_avoid.repository.daos_drug;
+package es.uvigo.mei.drugs_to_avoid.repository.daos;
 
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Drug;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades.Drug;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package es.uvigo.mei.drugs_to_avoid;
 
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.DrugDao;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.ManufacturerDao;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PublicationDao;
+import es.uvigo.mei.drugs_to_avoid.repository.daos.DrugDao;
+import es.uvigo.mei.drugs_to_avoid.repository.daos.ManufacturerDao;
+import es.uvigo.mei.drugs_to_avoid.repository.daos.PublicationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

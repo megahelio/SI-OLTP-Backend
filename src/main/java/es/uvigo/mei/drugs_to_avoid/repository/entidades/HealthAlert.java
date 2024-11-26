@@ -1,6 +1,5 @@
-package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
+package es.uvigo.mei.drugs_to_avoid.repository.entidades;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 

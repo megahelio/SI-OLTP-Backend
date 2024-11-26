@@ -1,8 +1,8 @@
 package es.uvigo.mei.drugs_to_avoid.controller;
 
 import es.uvigo.mei.drugs_to_avoid.controller.error_response.ErrorResponse;
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.ManufacturerDao;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Manufacturer;
+import es.uvigo.mei.drugs_to_avoid.repository.daos.ManufacturerDao;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades.Manufacturer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
+package es.uvigo.mei.drugs_to_avoid.repository.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,12 +24,4 @@ public class Drug implements Serializable {
     String alternative;
     Boolean isPrimaryCare;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonBackReference
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
-    @JoinTable(
-            name = "DRUG_PRODUCT",
-            joinColumns = @JoinColumn(name = "DRUG_ID", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "gtin"))
-     List<Product> productList;
 }

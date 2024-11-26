@@ -1,11 +1,10 @@
-package es.uvigo.mei.drugs_to_avoid.repository.entidades_drug;
+package es.uvigo.mei.drugs_to_avoid.repository.entidades;
 
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.embedables.Address;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades.embedables.Address;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data

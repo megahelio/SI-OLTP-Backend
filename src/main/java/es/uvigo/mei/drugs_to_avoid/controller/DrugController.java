@@ -1,7 +1,7 @@
 package es.uvigo.mei.drugs_to_avoid.controller;
 
-import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.DrugDao;
-import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Drug;
+import es.uvigo.mei.drugs_to_avoid.repository.daos.DrugDao;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades.Drug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,7 +50,6 @@ public class DrugController {
         Drug savedDrug = drugDao.save(drug);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDrug);
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<Drug> update(@PathVariable Long id, @RequestBody Drug drugDetails) {
