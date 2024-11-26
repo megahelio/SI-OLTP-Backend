@@ -32,7 +32,17 @@ public class DrugController {
 
     @GetMapping(params = "activePrinciple")
     public ResponseEntity<List<Drug>> findById(@RequestParam(name = "activePrinciple", required = true) String activePrinciple) {
-        return ResponseEntity.ok(drugDao.findByActivePrinciple(activePrinciple));
+        return ResponseEntity.ok(drugDao.findByActivePrincipleContaining(activePrinciple));
+    }
+
+    @GetMapping(params = "atc")
+    public ResponseEntity<List<Drug>> findByAtc(@RequestParam(name = "atc", required = true) String atc) {
+        return ResponseEntity.ok(drugDao.findByAtcContaining(atc));
+    }
+
+    @GetMapping(params = "isPrimaryCare")
+    public ResponseEntity<List<Drug>> findByAtc(@RequestParam(name = "isPrimaryCare", required = true) Boolean isPrimaryCare) {
+        return ResponseEntity.ok(drugDao.findByIsPrimaryCare(isPrimaryCare));
     }
 
     @PostMapping(consumes = "application/json")

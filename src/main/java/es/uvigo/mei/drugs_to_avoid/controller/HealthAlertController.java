@@ -2,6 +2,7 @@ package es.uvigo.mei.drugs_to_avoid.controller;
 
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.HealthAlertDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.HealthAlert;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,10 @@ public class HealthAlertController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping(params = "organization")
+    public ResponseEntity<List<HealthAlert>> findByName(@RequestParam(name = "organization", required = true) String organization) {
+        return ResponseEntity.ok(healthAlertDao.findByOrganizationContaining(organization));
     }
     @PostMapping(consumes = "application/json")
     public ResponseEntity<HealthAlert> create(@RequestBody HealthAlert healthAlert) {

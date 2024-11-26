@@ -5,8 +5,6 @@ import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.ManufacturerDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Manufacturer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +39,10 @@ public class ManufacturerController {
         return manufacturerDao.findByCif(cif)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping(params = "name")
+    public ResponseEntity<List<Manufacturer>> findByName(@RequestParam(required = true) String name) {
+        return ResponseEntity.ok(manufacturerDao.findByNameContaining(name));
     }
 
     @PostMapping(consumes = "application/json")

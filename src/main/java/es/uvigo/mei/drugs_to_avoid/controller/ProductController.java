@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="products", produces = "application/json")
+@RequestMapping(path = "products", produces = "application/json")
 public class ProductController {
 
     @Autowired
     ProductDao productDao;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll(){
-        return  ResponseEntity.ok(productDao.findAll());
+    public ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok(productDao.findAll());
     }
 
     @GetMapping("/{id}")
@@ -31,6 +31,12 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping(params = "name")
+    public ResponseEntity<List<Product>> findByName(@RequestParam(name = "name", required = true) String name) {
+        return ResponseEntity.ok(productDao.findByName(name));
+    }
+
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Product> create(@RequestBody Product product) {
         Product savedProduct = productDao.save(product);

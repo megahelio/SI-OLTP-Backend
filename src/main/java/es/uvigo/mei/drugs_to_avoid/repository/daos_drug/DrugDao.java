@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface DrugDao extends JpaRepository<Drug, Long> {
-    List<Drug> findByActivePrinciple(String patron);
+    List<Drug> findByActivePrincipleContaining(String patron);
+    List<Drug> findByAtcContaining(String patron);
+    List<Drug> findByIsPrimaryCare(Boolean isPrimaryCare);
 }

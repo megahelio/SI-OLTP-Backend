@@ -2,6 +2,7 @@ package es.uvigo.mei.drugs_to_avoid.controller;
 
 import es.uvigo.mei.drugs_to_avoid.controller.error_response.ErrorResponse;
 import es.uvigo.mei.drugs_to_avoid.repository.daos_drug.PublicationDao;
+import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.HealthAlert;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades_drug.Publication;
 import es.uvigo.mei.drugs_to_avoid.service.PrescrirePublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,10 @@ public class PrescrirePublicationController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping(params = "year")
+    public ResponseEntity<List<Publication>> findByName(@RequestParam(name = "year", required = true) Integer year) {
+        return ResponseEntity.ok(publicationDao.findByYear(year));
+    }
     @PostMapping(consumes = "application/json")
     public ResponseEntity<Publication> create(@RequestBody Publication publication) {
 
