@@ -1,9 +1,7 @@
 package es.uvigo.mei.drugs_to_avoid.controller;
 
-import es.uvigo.mei.drugs_to_avoid.controller.error_response.ErrorResponse;
 import es.uvigo.mei.drugs_to_avoid.repository.daos.PublicationDao;
 import es.uvigo.mei.drugs_to_avoid.repository.entidades.Publication;
-import es.uvigo.mei.drugs_to_avoid.service.PrescrirePublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ public class PrescrirePublicationController {
 
     @Autowired
     PublicationDao publicationDao;
-    @Autowired
-    PrescrirePublicationService prescrirePublicationService;
 
     @GetMapping()
     public ResponseEntity<List<Publication>> findAll() {
@@ -68,25 +64,5 @@ public class PrescrirePublicationController {
         }
     }
 
-    @PatchMapping("/{publication_id}")
-    public ResponseEntity<?> removeDrug(
-            @PathVariable Long publication_id,
-            @RequestParam(name = "drug_id", required = true) Long drug_id,
-            @RequestParam(name = "action", required = true) String action) {
 
-        Publication publicationSaved;
-        switch (action) {
-            case "removeDrug":
-                publicationSaved = prescrirePublicationService.removeDrug(publication_id, drug_id);
-                return ResponseEntity.ok(publicationSaved);
-            case "addDrug":
-                publicationSaved = prescrirePublicationService.addDrug(publication_id, drug_id);
-                return ResponseEntity.ok(publicationSaved);
-            default:
-                // Si la acción no es válida, lanzar una excepción o devolver un error
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ErrorResponse("Las acciones disponibles son 'addDrug' y 'removeDrug'")); //
-
-        }
-    }
 }
