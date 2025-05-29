@@ -1,7 +1,4 @@
-## 📁 si-drug-backend
-
-
-# si-drug-backend
+# 📁 si-drug-backend
 
 Backend del proyecto **SI-Drug**, desarrollado como parte de la asignatura de Sistemas de Información del Máster en Ingeniería Informática en el contexto de una pequeña demo de OLTP.
 
