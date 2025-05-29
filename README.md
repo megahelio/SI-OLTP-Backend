@@ -1,6 +1,6 @@
-# 📁 si-drug-backend
+# 📁 SI-OLTP-Backend
 
-Backend del proyecto **SI-Drug**, desarrollado como parte de la asignatura de Sistemas de Información del Máster en Ingeniería Informática en el contexto de una pequeña demo de OLTP.
+Backend del proyecto **SI-OLTP**, desarrollado como parte de la asignatura de Sistemas de Información del Máster en Ingeniería Informática en el contexto de una pequeña demo de OLTP.
 
 ## 🖥️ Descripción
 
