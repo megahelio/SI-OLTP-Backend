@@ -9,14 +9,14 @@ Aplicación backend construida con **Java** que proporciona servicios RESTful pa
 ## 🛠️ Tecnologías utilizadas
 
 - Java
-- Spring Boot (si aplica)
+- Spring Boot
 - SQL
 
 ## 📁 Estructura del proyecto
 
 - `src/`: Código fuente principal de la aplicación.
-- `DB_sin_schema.sql`: Script SQL para la creación de la base de datos sin esquema.
-- `DB_todo.sql`: Script SQL completo para la creación de la base de datos.
+- `DB_sin_schema.sql`: Script SQL que solo incluye datos de prueba sin schema.
+- `DB_todo.sql`: Script SQL completo para la creación de la base de datos (schema + datos de prueba).
 
 ## 🚀 Instalación y ejecución
 
